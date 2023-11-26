@@ -18,6 +18,7 @@ from django.urls import path,include
 from rest_framework import routers
 from core.api.viewsets import PontosTuristicosViewSet
 from atracoes.api.viewsets import AtracoesViewSet
+from avaliacoes.api.viewsets import AvaliacoesViewSet
 from enderecos.api.viewsets import EnderecosViewSet
 
 router = routers.DefaultRouter()

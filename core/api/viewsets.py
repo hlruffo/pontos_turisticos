@@ -1,11 +1,19 @@
 from rest_framework.viewsets import ModelViewSet
+
 #from rest_framework.decorators import action #para criação de ação especifica
 from core.models import PontosTuristico
+
 from .serializers import PontosTuristicoSerializer
+
 
 class PontosTuristicosViewSet(ModelViewSet):
     queryset = PontosTuristico.objects.all()
     serializer_class = PontosTuristicoSerializer
+    
+    #lookup field faz com que o termo nome seja aceito para busca de item
+    #especifico no lugar de id. o termo passado deve ser unico para não 
+    #causar erros de retoro.
+    #lookup_field = "nome"
     
     ##aplica permissão de acesso
     #permission_classes = [permissions.IsAuthenticated]

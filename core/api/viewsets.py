@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 #from rest_framework.decorators import action #para criação de ação especifica
 from core.models import PontosTuristico
-
+from rest_framework.permissions import IsAuthenticated
 from .serializers import PontosTuristicoSerializer
 
 
@@ -16,7 +16,7 @@ class PontosTuristicosViewSet(ModelViewSet):
     #lookup_field = "nome"
     
     ##aplica permissão de acesso
-    #permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [IsAuthenticated,]
     
     ##Sobre escreve o método gert_queryset
     # def get_queryset(self):

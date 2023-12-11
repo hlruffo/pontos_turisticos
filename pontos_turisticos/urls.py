@@ -24,7 +24,8 @@ from atracoes.api.viewsets import AtracaoViewSet
 from avaliacoes.api.viewsets import AvaliacaoViewSet
 from comentarios.api.viewsets import ComentarioViewSet
 from enderecos.api.viewsets import EnderecoViewSet
-
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 router = routers.DefaultRouter()
 router.register(r'pontoturistico', PontosTuristicosViewSet)
@@ -35,9 +36,25 @@ router.register(r'avaliacoes', AvaliacaoViewSet)
 router.register(r'comentarios', ComentarioViewSet)
 router.register(r'enderecos', EnderecoViewSet)
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Pontos Turísticos",
+        default_version='v1',
+        description="API do sistema de pontos turísticos",
+        contact=openapi.Contact(email="hugo.ruffo@brilliantmachine.com.br"),
+    ),
+    public=True,
+    #permission_classes=(permissions.DjangoModelPermissionsOrAnonReadOnly,),
+)
+
 
 urlpatterns = [
     path('',include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-token-auth/', obtain_auth_token),
+    
+    #links para documentação
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('docs/', schema_view.with_ui('redoc', cache_timeout=0),
+        name='schema-redoc')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

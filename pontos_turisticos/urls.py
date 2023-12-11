@@ -13,22 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.authtoken.views import obtain_auth_token
+from django.contrib import admin
+from django.urls import include, path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import routers
-from core.api.viewsets import PontosTuristicosViewSet
+from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework import permissions
+
+
 from atracoes.api.viewsets import AtracaoViewSet
 from avaliacoes.api.viewsets import AvaliacaoViewSet
 from comentarios.api.viewsets import ComentarioViewSet
+from core.api.viewsets import PontosTuristicosViewSet
 from enderecos.api.viewsets import EnderecoViewSet
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
 router = routers.DefaultRouter()
-router.register(r'pontoturistico', PontosTuristicosViewSet)
+router.register(r'pontosturisticos', PontosTuristicosViewSet)
 #router.register(r'pontoturistico', PontosTuristicosViewSet, basename='PontosTuristicos') -> usado para
 #sobreescrever get_queryset
 router.register(r'atracoes', AtracaoViewSet)
